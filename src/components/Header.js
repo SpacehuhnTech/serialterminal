@@ -3,8 +3,8 @@ import React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-//import Button from '@mui/material/Button'
-//import InfoIcon from '@mui/icons-material/Info'
+import Button from '@mui/material/Button'
+import LocalCafeIcon from '@mui/icons-material/LocalCafe'
 
 const Header = (props) => {
     return (
@@ -30,16 +30,15 @@ const Header = (props) => {
                     &nbsp;Web Serial Terminal
                 </Typography>
 
-                {/*
                 <Button
                     //variant='contained'
                     //color='success'
                     sx={{ color: '#fff' }}
-                    href='https://docs.serial.huhn.me'
-                    startIcon={<InfoIcon />}>
-                    Help
+                    href='https://ko-fi.com/spacehuhn'
+                    target='_blank'
+                    startIcon={<LocalCafeIcon />}>
+                    Say Thanks
                 </Button>
-                */}
             </Toolbar>
         </AppBar>
     )
