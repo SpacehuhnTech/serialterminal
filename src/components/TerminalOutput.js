@@ -7,7 +7,7 @@ const TerminalOutput = (props) => {
         <Box sx={{
             height: '100%',
             width: '100%',
-            background: '#1a1a1e',
+            background: '#202124',
             borderRadius: '4px',
             padding: 0,
             margin: 0,
@@ -16,8 +16,27 @@ const TerminalOutput = (props) => {
             overflowY: 'scroll',
             flexDirection: 'column-reverse',
             resize: 'vertical',
+            '&::-webkit-scrollbar': {
+                width: '8px',
+                height: '8px',
+            },
+            '&::-webkit-scrollbar-track': {
+                background: 'transparent',
+                borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+                background: '#555',
+                borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-corner': {
+                background: 'transparent',
+                borderRadius: '4px',
+            },
+            '&::-webkit-resizer': {
+                display: 'none',
+            },
         }}>
-            <Box sx={{
+            <pre style={{
                 margin: '.5rem',
                 padding: 0,
                 fontFamily: [
@@ -27,16 +46,17 @@ const TerminalOutput = (props) => {
                 fontWeight: 300,
             }}>
                 {props.history.map((obj, i) => (
-                    <span key={i} 
-                    style={{
-                        color: obj.type === 'output' ? '#fff' : '#618833',
-                    }}>
+                    <span key={i}
+                        style={{
+                            color: obj.type === 'userInput' ? '#fbbc05' : '#fff',
+                            fontWeight:  obj.type === 'userInput' ? '700' : '300',
+                        }}>
                         {obj.msg}
-                        <hr />
+                        {obj.type === 'userInput' && <hr />}
                         <br />
                     </span>
                 ))}
-            </Box>
+            </pre>
         </Box>
     )
 }
