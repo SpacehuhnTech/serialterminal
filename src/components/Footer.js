@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 
 import version from '../version.js'
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <Box>
             { /* Made in Germany :D */}
