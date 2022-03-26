@@ -25,9 +25,12 @@ const Header = (props) => {
                     variant='h6'
                     component='h1'
                     noWrap
-                    sx={{ flexGrow: 1 }}
+                    sx={{ 
+                        flexGrow: 1,
+                        fontFamily: 'Bungee',
+                    }}
                 >
-                    &nbsp;Web Serial Terminal
+                    &nbsp;Serial Terminal
                 </Typography>
 
                 <Button
