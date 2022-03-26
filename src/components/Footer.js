@@ -10,7 +10,7 @@ const Footer = (props) => {
     return (
         <Box>
             { /* Made in Germany :D */}
-            <Box sx={{ mx: 'auto', mt: 5 }}>
+            <Box sx={{ mx: 'auto', mt: 0 }}>
                 <Typography
                 align='center'
                 display='block'>

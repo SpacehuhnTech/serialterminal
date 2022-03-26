@@ -10,21 +10,22 @@ const Terminal = (props) => {
         <Grid container spacing={1} sx={{
             padding: '.5em',
         }}>
-            { /* Output Terminal View */}
-            <Grid item xs={12} sx={{
-                position: 'relative',
-                height: 'calc(100vh - 140px)',
-                minHeight: '10em',
-            }}>
-                <TerminalOutput
-                    history={props.history}
-                />
-            </Grid>
 
             { /* Input Field & Send Button */}
             <Grid item xs={12}>
                 <TerminalInput
                     send={props.send}
+                />
+            </Grid>
+
+            { /* Output Terminal View */}
+            <Grid item xs={12} sx={{
+                position: 'relative',
+                height: 'calc(100vh - 180px)',
+                minHeight: '10em',
+            }}>
+                <TerminalOutput
+                    history={props.history}
                 />
             </Grid>
         </Grid>
