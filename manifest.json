@@ -1,16 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Serail",
+  "name": "Web Serial Terminal",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
+      "src": "logo768.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "768x512"
     },
     {
       "src": "logo512.png",
