@@ -44,10 +44,6 @@ function App() {
     setConnected(false)
   }
 
-  const send = (str) => {
-    serial.send(`${str}\n`)
-  }
-
   return (
     <Box>
       <Header />
@@ -61,7 +57,7 @@ function App() {
       {connected &&
         <Terminal
           received={received}
-          send={send}
+          send={(str) => serial.send(str)}
         />
       }
 

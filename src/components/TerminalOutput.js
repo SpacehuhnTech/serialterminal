@@ -36,7 +36,7 @@ const TerminalOutput = (props) => {
                 display: 'none',
             },
         }}>
-            <pre style={{
+            <code style={{
                 margin: '.5rem',
                 padding: 0,
                 fontFamily: [
@@ -48,7 +48,7 @@ const TerminalOutput = (props) => {
                 {props.history.map((obj, i) => (
                     <span key={i}
                         style={{
-                            color: obj.type === 'userInput' ? '#fbbc05' : '#fff',
+                            color: obj.type === 'userInput' ? '#fbbc05' : '#e8eaed',
                             fontWeight:  obj.type === 'userInput' ? '700' : '300',
                         }}>
                         {obj.msg}
@@ -56,7 +56,7 @@ const TerminalOutput = (props) => {
                         <br />
                     </span>
                 ))}
-            </pre>
+            </code>
         </Box>
     )
 }

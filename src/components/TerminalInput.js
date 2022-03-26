@@ -5,31 +5,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
 const TerminalInput = (props) => {
-    const [input, setInput] = React.useState('')
     const [disableSend, setDisableSend] = React.useState(false)
-
-    const handleSend = () => {
-        if (disableSend) return
-        if (input.length === 0) return
-
-        let _input = input
-        setInput('')
-
-        props.send(_input)
-
-        //setDisableSend(true)
-
-        // Disable send to prevent spam which leads to crashes
-        /*setTimeout(() => {
-            setDisableSend(false)
-        }, 3000)*/
-
-        /*if (history.commands[history.commands.length - 1] != _input) {
-            setHistory({
-                commands: [...history.commands, _input],
-            })
-        }*/
-    }
 
     return (
         <Grid container spacing={0}>
@@ -40,10 +16,10 @@ const TerminalInput = (props) => {
                 <TextField
                     label='Input'
                     variant='outlined'
-                    onChange={(e) => setInput(e.target.value)}
-                    value={input}
+                    onChange={(e) => props.setInput(e.target.value)}
+                    value={props.input}
                     fullWidth
-                    onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                    onKeyDown={(e) => e.key === 'Enter' && props.send()}
                     disabled={disableSend}
                     autoFocus
                     inputRef={input => input && input.focus()}
@@ -64,7 +40,7 @@ const TerminalInput = (props) => {
                 }}
                     variant='contained'
                     disableElevation
-                    onClick={() => handleSend()}
+                    onClick={() => props.send()}
                     disabled={disableSend}
                     fullWidth
                 >Send</Button>
