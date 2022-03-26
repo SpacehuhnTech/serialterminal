@@ -19,20 +19,20 @@ const Terminal = (props) => {
     const [input, setInput] = React.useState('')
 
     // Currently receieved string & list of previous receieved lines
-    const [received, setReceived] = React.useState('')
+    const received = React.useRef('')
     const [history, setHistory] = React.useState([])
     
     // User input history
     const [historyOpen, setHistoryOpen] = React.useState(false)
     const [historyAvailable, setHistoryAvailable] = React.useState(false)
-
+    
     useEffect(
         () => {
-            const str = `${received}${props.received}`
+            const str = `${received.current}${props.received}`
             const lines = str.split('\n')
 
             let newReceived = str
-            const newLines = [...history]
+            const newLines = []
 
             if (lines.length > 1) {
                 newReceived = lines.pop()
@@ -44,9 +44,8 @@ const Terminal = (props) => {
                     })
                 })
             }
-
-            setHistory(newLines)
-            setReceived(newReceived)
+            setHistory((current) => current.concat(newLines))
+            received.current = newReceived
         },
         [props.received],
     )
