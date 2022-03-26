@@ -4,7 +4,8 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import LocalCafeIcon from '@mui/icons-material/LocalCafe'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const Header = () => {
     return (
@@ -39,8 +40,16 @@ const Header = () => {
                     sx={{ color: '#fff' }}
                     href='https://ko-fi.com/spacehuhn'
                     target='_blank'
-                    startIcon={<LocalCafeIcon />}>
+                    startIcon={<FavoriteIcon />}>
                     Say Thanks
+                </Button>
+
+                <Button
+                    sx={{ color: '#fff' }}
+                    target='_blank'
+                    href='#'
+                >
+                    <AddBoxIcon/>
                 </Button>
             </Toolbar>
         </AppBar>
