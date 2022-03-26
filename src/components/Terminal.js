@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -141,6 +142,11 @@ const Terminal = (props) => {
             </Dialog>
         </Grid>
     )
+}
+
+Terminal.propTypes = {
+    received: PropTypes.string,
+    send: PropTypes.func,
 }
 
 export default Terminal

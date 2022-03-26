@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -24,6 +25,10 @@ const Home = (props) => {
 
         </Grid>
     )
+}
+
+Home.propTypes = {
+    connect: PropTypes.func,
 }
 
 export default Home

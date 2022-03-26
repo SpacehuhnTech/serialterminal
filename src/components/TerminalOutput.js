@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Box from '@mui/material/Box'
 
@@ -59,6 +60,10 @@ const TerminalOutput = (props) => {
             </code>
         </Box>
     )
+}
+
+TerminalOutput.propTypes = {
+    history: PropTypes.array,
 }
 
 export default TerminalOutput

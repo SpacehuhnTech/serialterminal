@@ -38,11 +38,11 @@ function App() {
 
     serial.requestPort()
   }
-
+  /*
   const disconnect = () => {
     serial.close()
     setConnected(false)
-  }
+  }*/
 
   return (
     <Box>

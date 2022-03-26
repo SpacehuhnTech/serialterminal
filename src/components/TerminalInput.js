@@ -1,11 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
 const TerminalInput = (props) => {
-    const [disableSend, setDisableSend] = React.useState(false)
+    //const [disableSend, setDisableSend] = React.useState(false)
 
     return (
         <Grid container spacing={0}>
@@ -20,7 +21,7 @@ const TerminalInput = (props) => {
                     value={props.input}
                     fullWidth
                     onKeyDown={(e) => e.key === 'Enter' && props.send()}
-                    disabled={disableSend}
+                    //disabled={disableSend}
                     autoFocus
                     inputRef={input => input && input.focus()}
                 />
@@ -41,12 +42,18 @@ const TerminalInput = (props) => {
                     variant='contained'
                     disableElevation
                     onClick={() => props.send()}
-                    disabled={disableSend}
+                    //disabled={disableSend}
                     fullWidth
                 >Send</Button>
             </Grid>
         </Grid>
     )
+}
+
+TerminalInput.propTypes = {
+    input: PropTypes.string,
+    setInput: PropTypes.func,
+    send: PropTypes.func,
 }
 
 export default TerminalInput
