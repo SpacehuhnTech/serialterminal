@@ -108,7 +108,7 @@ const TerminalOutput = (props) => {
             <ButtonGroup variant='text' sx={buttonGroupCSS}>
 
                 { /* Clear */}
-                <Button sx={buttonCSS} /*onClick={() => handleClear()}*/>
+                <Button sx={buttonCSS} onClick={() => props.setHistory([])}>
                     <HighlightOffIcon color='inherit' />
                 </Button>
 
@@ -165,6 +165,7 @@ const TerminalOutput = (props) => {
 
 TerminalOutput.propTypes = {
     history: PropTypes.array,
+    setHistory: PropTypes.func,
     setInput: PropTypes.func,
 }
 

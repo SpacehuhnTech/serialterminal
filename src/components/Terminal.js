@@ -59,6 +59,7 @@ const Terminal = (props) => {
             <Grid item xs={12}>
                 <TerminalOutput
                     history={history}
+                    setHistory={setHistory}
                     setInput={setInput}
                 />
             </Grid>
