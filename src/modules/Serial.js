@@ -23,6 +23,7 @@ export default class Serial {
     async requestPort() {
         await this.close()
 
+        /*
         navigator.serial.addEventListener('connect', (e) => {
             this.port = e.port || e.target
             this.openPort()
@@ -32,6 +33,7 @@ export default class Serial {
             console.warn(`[SERIAL] Disconnected!`)
             this.onFail()
         })
+        */
 
         // Filter on devices with the Arduino Uno USB Vendor/Product IDs
         const filters = [
@@ -61,6 +63,11 @@ export default class Serial {
         }
 
         console.log(`[SERIAL] Connected`)
+
+        this.port.addEventListener('disconnect', () => {
+            console.warn(`[SERIAL] Disconnected!`)
+            this.onFail()
+        })
 
         this.outputStream = this.port.writable
         this.inputStream = this.port.readable
@@ -118,7 +125,7 @@ export default class Serial {
         if (this.open) {
             this.open = false
 
-            this.reader.cancel()
+            await this.reader.cancel().catch(() => { /* Ignore the error */ })
             await this.readableStreamClosed.catch(() => { /* Ignore the error */ })
 
             await this.port.close()
