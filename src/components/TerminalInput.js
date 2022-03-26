@@ -5,8 +5,22 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
+// Thanks https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering
+const useFocus = () => {
+    const htmlElRef = React.useRef(null)
+    const setFocus = () => { htmlElRef.current && htmlElRef.current.focus() }
+
+    return [htmlElRef, setFocus]
+}
+
 const TerminalInput = (props) => {
     //const [disableSend, setDisableSend] = React.useState(false)
+    const [inputFocus, setInputFocus] = useFocus()
+
+    React.useEffect(() => {
+        setInputFocus()
+        //console.log('focused')
+    }, [props.input])
 
     return (
         <Grid container spacing={0}>
@@ -23,7 +37,7 @@ const TerminalInput = (props) => {
                     onKeyDown={(e) => e.key === 'Enter' && props.send()}
                     //disabled={disableSend}
                     autoFocus
-                    inputRef={input => input && input.focus()}
+                    inputRef={inputFocus}
                 />
             </Grid>
             <Grid item sx={{
