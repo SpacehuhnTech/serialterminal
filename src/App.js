@@ -16,7 +16,7 @@ function App() {
   const [connected, setConnected] = React.useState(false)
   const [received, setReceived] = React.useState('')
   const [toast, setToast] = React.useState({ open: false, severity: 'info', value: '' })
-
+  
   const closeToast = () => {
     setToast({ ...toast, open: false })
   }
@@ -65,6 +65,7 @@ function App() {
         :
         <Home
           connect={connect}
+          supported={serial.supported}
         />
       }
 
