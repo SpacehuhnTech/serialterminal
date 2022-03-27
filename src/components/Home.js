@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Box from '@mui/material/Grid'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import Alert from '@mui/material/Alert'
@@ -9,6 +10,7 @@ import AlertTitle from '@mui/material/AlertTitle'
 import ChromeIcon from '../icons/Chrome'
 import EdgeIcon from '../icons/Edge'
 import OperaIcon from '../icons/Opera'
+import { Typography } from '@mui/material'
 
 const gridCSS = {
     height: 'calc(100vh - 160px)',
@@ -29,10 +31,21 @@ const Home = (props) => {
             <Grid item xs={3}>
 
                 {props.supported() ?
-                    <Button variant='contained' color='success' size='large' onClick={props.connect}>
-                        Connect
-                    </Button>
+                    <Box align='center'>
+                        <Button variant='contained' color='success' size='large' onClick={props.connect}>
+                            Connect
+                        </Button>
+                        <Typography>
+                            <br />
+                        </Typography>
+                        <Alert severity='info' align='left'>
+                            1. Click on CONNECT<br />
+                            2. Plug in your device & select a port<br />
+                            3. Enjoy the Serial Terminal 😊<br />
+                        </Alert>
+                    </Box>
                     :
+
                     <Alert severity='warning'>
                         <AlertTitle>Your browser doesn&apos;t support Web Serial 😭</AlertTitle>
                         Try using&nbsp;
