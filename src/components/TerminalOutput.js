@@ -13,8 +13,7 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemIcon from '@mui/material/ListItemIcon'
-
-import TerminalIcon from '../icons/Terminal'
+import TerminalIcon from '@mui/icons-material/Terminal';
 
 const preCSS = {
     position: 'relative',
