@@ -54,7 +54,7 @@ function App() {
   const [toast, setToast] = React.useState({ open: false, severity: 'info', value: '' })
 
   // Settings Window Open
-  const [settingsOpen, setSettingsOpen] = React.useState(true)
+  const [settingsOpen, setSettingsOpen] = React.useState(false)
 
   // Settings
   const settings = loadSettings()
@@ -150,6 +150,7 @@ function App() {
         setEchoFlag={setEchoFlag}
         save={handleSave}
         openPort={connected}
+        saveToast={() => setToast({ open: true, severity: 'success', value: 'Settings saved ✨' })}
       />
 
       {/* (Dis)connected Toast */}

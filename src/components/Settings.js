@@ -46,15 +46,33 @@ const formElementCSS = {
 }
 
 const Settings = (props) => {
+    const [baudRate, setBaudRate] = React.useState(props.baudRate)
+    const [lineEnding, setLineEnding] = React.useState(props.lineEnding)
+    const [echoFlag, setEchoFlag] = React.useState(props.echoFlag)
+
+    const cancel = () => {
+        setBaudRate(props.baudRate)
+        setLineEnding(props.lineEnding)
+        setEchoFlag(props.echoFlag)
+        
+        props.close()
+    }
+
     const reset = () => {
-        if(!props.openPort) props.setBaudRate(115200)
-        props.setLineEnding('\\r\\n')
-        props.setEchoFlag(true)
+        if(!props.openPort) setBaudRate(115200)
+        setLineEnding('\\r\\n')
+        setEchoFlag(true)
     }
 
     const save = () => {
+        props.setBaudRate(baudRate)
+        props.setLineEnding(lineEnding)
+        props.setEchoFlag(echoFlag)
+
         props.save()
         props.close()
+
+        props.saveToast()
     }
 
     return (
@@ -69,8 +87,8 @@ const Settings = (props) => {
                 <FormControl variant='filled' fullWidth sx={formElementCSS}>
                     <InputLabel>Baud Rate {props.openPort && '(Requires Reconnect)'}</InputLabel>
                     <Select
-                        value={props.baudRate}
-                        onChange={(e) => props.setBaudRate(e.target.value)}
+                        value={baudRate}
+                        onChange={(e) => setBaudRate(e.target.value)}
                         label='baudrate'
                         disabled={props.openPort}
                     >
@@ -83,8 +101,8 @@ const Settings = (props) => {
                 <FormControl variant='filled' fullWidth sx={formElementCSS} >
                     <InputLabel>Line Ending</InputLabel>
                     <Select
-                        value={props.lineEnding}
-                        onChange={(e) => props.setLineEnding(e.target.value)}
+                        value={lineEnding}
+                        onChange={(e) => setLineEnding(e.target.value)}
                         label='Line Ending'
                     >
                         {lineEndings.map(name =>
@@ -96,8 +114,8 @@ const Settings = (props) => {
                 <FormGroup>
                     <FormControlLabel control={
                         <Checkbox
-                            checked={props.echoFlag}
-                            onChange={(e) => props.setEchoFlag(e.target.checked)}
+                            checked={echoFlag}
+                            onChange={(e) => setEchoFlag(e.target.checked)}
                         />
                     } label='Show input (echo)' />
                 </FormGroup>
@@ -106,7 +124,8 @@ const Settings = (props) => {
 
             <DialogActions>
                 <Button onClick={reset} color='error'>Reset</Button>
-                <Button onClick={save}>Save</Button>
+                <Button onClick={cancel} color='secondary'>Cancel</Button>
+                <Button onClick={save} color='primary'>Save</Button>
             </DialogActions>
         </Dialog>
     )
@@ -123,6 +142,7 @@ Settings.propTypes = {
     setEchoFlag: PropTypes.func,
     save: PropTypes.func,
     openPort: PropTypes.bool,
+    saveToast: PropTypes.func,
 }
 
 export default Settings
