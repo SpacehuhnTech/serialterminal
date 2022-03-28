@@ -39,7 +39,7 @@ const Terminal = (props) => {
     )
 
     const handleSend = () => {
-        props.send(`${input}\n`)
+        props.send(input)
 
         setHistory([
             ...history,
@@ -61,6 +61,8 @@ const Terminal = (props) => {
                     history={history}
                     setHistory={setHistory}
                     setInput={setInput}
+                    openSettings={props.openSettings}
+                    echo={props.echo}
                 />
             </Grid>
 
@@ -79,6 +81,8 @@ const Terminal = (props) => {
 Terminal.propTypes = {
     received: PropTypes.string,
     send: PropTypes.func,
+    openSettings: PropTypes.func,
+    echo: PropTypes.bool,
 }
 
 export default Terminal

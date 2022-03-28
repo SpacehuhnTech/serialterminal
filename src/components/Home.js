@@ -10,7 +10,7 @@ import AlertTitle from '@mui/material/AlertTitle'
 import ChromeIcon from '../icons/Chrome'
 import EdgeIcon from '../icons/Edge'
 import OperaIcon from '../icons/Opera'
-import { Typography } from '@mui/material'
+import SettingsIcon from '@mui/icons-material/Settings'
 
 const gridCSS = {
     height: 'calc(100vh - 160px)',
@@ -32,18 +32,25 @@ const Home = (props) => {
 
                 {props.supported() ?
                     <Box align='center'>
-                        <Button variant='contained' color='success' size='large' onClick={props.connect}>
-                            Connect
-                        </Button>
-                        <Typography>
-                            <br />
-                        </Typography>
+                        <Box>
+                            <Button variant='contained' color='success' size='large' onClick={props.connect} sx={{ m: 1 }}>
+                                Connect
+                            </Button>
+                        </Box>
+
+                        <Box>
+                            <Button size='large' onClick={props.openSettings} sx={{ m: 1, color:'#bebebe' }}>
+                                <SettingsIcon />
+                            </Button>
+                        </Box>
+
                         <Alert severity='info' align='left'>
                             1. Click on CONNECT<br />
                             2. Plug in your device & select the port<br />
                             3. Enjoy the Serial Terminal 😊<br />
                         </Alert>
                     </Box>
+
                     :
 
                     <Alert severity='warning'>
@@ -79,6 +86,7 @@ const Home = (props) => {
 Home.propTypes = {
     connect: PropTypes.func,
     supported: PropTypes.func,
+    openSettings: PropTypes.func,
 }
 
 export default Home

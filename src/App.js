@@ -8,15 +8,60 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './components/Home'
 import Terminal from './components/Terminal'
+import Settings from './components/Settings'
 
 import Serial from './modules/Serial'
+import { setCookie, getCookie } from './modules/cookie.js'
+
+const saveSettings = (settings) => {
+  setCookie('settings', JSON.stringify(settings), 365)
+}
+
+const loadSettings = () => {
+  let settings = {
+    baudRate: 115200,
+    lineEnding: '\\r\\n',
+    echoFlag: true,
+  }
+
+  const cookieValue = getCookie('settings')
+
+  try {
+    const cookieJSON = JSON.parse(cookieValue)
+
+    if ('baudRate' in cookieJSON) settings.baudRate = cookieJSON.baudRate
+    if ('lineEnding' in cookieJSON) settings.lineEnding = cookieJSON.lineEnding
+    if ('echoFlag' in cookieJSON) settings.echoFlag = cookieJSON.echoFlag
+  } catch (e) {
+    console.error(e)
+  }
+
+  saveSettings(settings)
+  return settings
+}
 
 function App() {
+  // Serial Module
   const [serial] = React.useState(new Serial())
+
+  // Connection Flag
   const [connected, setConnected] = React.useState(false)
+
+  // Receive Buffer
   const [received, setReceived] = React.useState('')
+
+  // Connect/Disconnect Toast Open
   const [toast, setToast] = React.useState({ open: false, severity: 'info', value: '' })
-  
+
+  // Settings Window Open
+  const [settingsOpen, setSettingsOpen] = React.useState(true)
+
+  // Settings
+  const settings = loadSettings()
+  const [baudRate, setBaudRate] = React.useState(settings.baudRate)
+  const [lineEnding, setLineEnding] = React.useState(settings.lineEnding)
+  const [echoFlag, setEchoFlag] = React.useState(settings.echoFlag)
+
   const closeToast = () => {
     setToast({ ...toast, open: false })
   }
@@ -51,6 +96,27 @@ function App() {
     setConnected(false)
   }*/
 
+  const handleSend = (str) => {
+    const map = {
+      'None': '',
+      '\\r': '\r',
+      '\\n': '\n',
+      '\\r\\n': '\r\n',
+    }
+
+    serial.send(`${str}${map[lineEnding]}`)
+  }
+
+  const handleSave = () => {
+    serial.setBaudRate(baudRate)
+    
+    saveSettings({
+      baudRate: baudRate,
+      lineEnding: lineEnding,
+      echoFlag: echoFlag
+    })
+  }
+
   return (
     <Box>
       {/* Header */}
@@ -60,14 +126,31 @@ function App() {
       {connected ?
         <Terminal
           received={received}
-          send={str => serial.send(str)}
+          send={handleSend}
+          openSettings={() => setSettingsOpen(true)}
+          echo={echoFlag}
         />
         :
         <Home
           connect={connect}
           supported={serial.supported}
+          openSettings={() => setSettingsOpen(true)}
         />
       }
+
+      {/* Settings Window */}
+      <Settings
+        open={settingsOpen}
+        close={() => setSettingsOpen(false)}
+        baudRate={baudRate}
+        setBaudRate={setBaudRate}
+        lineEnding={lineEnding}
+        setLineEnding={setLineEnding}
+        echoFlag={echoFlag}
+        setEchoFlag={setEchoFlag}
+        save={handleSave}
+        openPort={connected}
+      />
 
       {/* (Dis)connected Toast */}
       <Snackbar open={toast.open} autoHideDuration={4000} onClose={closeToast}>

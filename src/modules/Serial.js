@@ -14,6 +14,8 @@ export default class Serial {
 
         this.outputStream = undefined
         this.inputStream = undefined
+
+        this.baudRate = 115200
     }
 
     supported() {
@@ -55,7 +57,7 @@ export default class Serial {
 
     async openPort() {
         try {
-            await this.port.open({ baudRate: 115200 })
+            await this.port.open({ baudRate: this.baudRate })
         } catch (e) {
             console.error(e)
             this.onFail()
@@ -132,5 +134,9 @@ export default class Serial {
 
             console.log('[SERIAL] Closed')
         }
+    }
+
+    setBaudRate(newBaudRate) {
+        this.baudRate = newBaudRate
     }
 }

@@ -117,7 +117,7 @@ const TerminalOutput = (props) => {
                 </Button>
 
                 { /* Settings */}
-                <Button sx={buttonCSS} /*onClick={() => handleStop()}*/>
+                <Button sx={buttonCSS} onClick={props.openSettings}>
                     <SettingsIcon color='inherit' />
                 </Button>
             </ButtonGroup>
@@ -125,7 +125,7 @@ const TerminalOutput = (props) => {
             { /* Text */}
             <Box sx={boxCSS}>
                 <code style={codeCSS}>
-                    {props.history.map((obj, i) => (
+                    {props.history.filter(line => (line.type === 'output' || props.echo)).map((obj, i) => (
                         <span key={i} style={lineCSS[obj.type]}>
                             {obj.msg}
                             {obj.type === 'userInput' && <hr />}
@@ -166,6 +166,8 @@ TerminalOutput.propTypes = {
     history: PropTypes.array,
     setHistory: PropTypes.func,
     setInput: PropTypes.func,
+    openSettings: PropTypes.func,
+    echo: PropTypes.bool,
 }
 
 export default TerminalOutput
