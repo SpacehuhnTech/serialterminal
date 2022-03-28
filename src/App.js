@@ -129,6 +129,7 @@ function App() {
           send={handleSend}
           openSettings={() => setSettingsOpen(true)}
           echo={echoFlag}
+          clearToast={() => setToast({ open: true, severity: 'info', value: 'History cleared 🧹' })}
         />
         :
         <Home

@@ -63,6 +63,7 @@ const Terminal = (props) => {
                     setInput={setInput}
                     openSettings={props.openSettings}
                     echo={props.echo}
+                    clearToast={props.clearToast}
                 />
             </Grid>
 
@@ -83,6 +84,7 @@ Terminal.propTypes = {
     send: PropTypes.func,
     openSettings: PropTypes.func,
     echo: PropTypes.bool,
+    clearToast: PropTypes.func,
 }
 
 export default Terminal

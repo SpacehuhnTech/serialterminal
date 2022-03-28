@@ -100,6 +100,11 @@ const TerminalOutput = (props) => {
     // User input history window
     const [historyOpen, setHistoryOpen] = React.useState(false)
 
+    const handleClear = () => {
+        props.clearToast()
+        props.setHistory([])
+    }
+
     return (
         <pre style={preCSS}>
 
@@ -107,7 +112,7 @@ const TerminalOutput = (props) => {
             <ButtonGroup variant='text' sx={buttonGroupCSS}>
 
                 { /* Clear */}
-                <Button sx={buttonCSS} onClick={() => props.setHistory([])}>
+                <Button sx={buttonCSS} onClick={handleClear}>
                     <HighlightOffIcon color='inherit' />
                 </Button>
 
@@ -143,7 +148,7 @@ const TerminalOutput = (props) => {
                 <DialogTitle>
                     History
                 </DialogTitle>
-                <List>
+                <List sx={{ minWidth: '10em' }}>
                     {props.history.filter(line => line.type === 'userInput').map((line, i) => (
                         <ListItem button key={`${line.msg}${i}`} onClick={() => {
                             props.setInput(line.msg)
@@ -168,6 +173,7 @@ TerminalOutput.propTypes = {
     setInput: PropTypes.func,
     openSettings: PropTypes.func,
     echo: PropTypes.bool,
+    clearToast: PropTypes.func,
 }
 
 export default TerminalOutput
