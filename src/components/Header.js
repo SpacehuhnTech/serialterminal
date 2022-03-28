@@ -31,7 +31,7 @@ const Header = () => {
                         fontFamily: 'Bungee',
                     }}
                 >
-                    &nbsp;Serial Terminal
+                    &nbsp;&nbsp;Serial Terminal
                 </Typography>
 
                 <Button
