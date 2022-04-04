@@ -49,10 +49,10 @@ export default class Serial {
             //await port.open({ baudRate: 115200 })
         } catch (e) {
             console.error(e)
-            return
+            return `${e}`
         }
 
-        this.openPort()
+        return this.openPort()
     }
 
     async openPort() {
@@ -61,7 +61,7 @@ export default class Serial {
         } catch (e) {
             console.error(e)
             this.onFail()
-            return
+            return `${e}`
         }
 
         console.log(`[SERIAL] Connected`)
@@ -78,6 +78,8 @@ export default class Serial {
         this.open = true
 
         this.read()
+
+        return ''
     }
 
     async read() {

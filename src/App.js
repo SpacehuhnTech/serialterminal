@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import Home from './components/Home'
 import Terminal from './components/Terminal'
 import Settings from './components/Settings'
+import ErrorMessage from './components/ErrorMessage'
 
 import Serial from './modules/Serial'
 import { setCookie, getCookie } from './modules/cookie.js'
@@ -56,6 +57,10 @@ function App() {
   // Settings Window Open
   const [settingsOpen, setSettingsOpen] = React.useState(false)
 
+  // Error Window
+  const [errorOpen, setErrorOpen] = React.useState(false)
+  const [errorMessage, setErrorMessage] = React.useState('')
+
   // Settings
   const settings = loadSettings()
   const [baudRate, setBaudRate] = React.useState(settings.baudRate)
@@ -88,7 +93,12 @@ function App() {
       //console.log(value)
     }
 
-    serial.requestPort()
+    serial.requestPort().then(res => {
+      if (res !== '') {
+        setErrorMessage(res)
+        setErrorOpen(true)
+      }
+    })
   }
   /*
   const disconnect = () => {
@@ -109,7 +119,7 @@ function App() {
 
   const handleSave = () => {
     serial.setBaudRate(baudRate)
-    
+
     saveSettings({
       baudRate: baudRate,
       lineEnding: lineEnding,
@@ -160,6 +170,13 @@ function App() {
           {toast.value}
         </Alert>
       </Snackbar>
+
+      {/* Error Message Window */}
+      <ErrorMessage
+        open={errorOpen}
+        close={() => setErrorOpen(false)}
+        message={errorMessage}
+      />
 
       {/* Footer */}
       <Footer />
