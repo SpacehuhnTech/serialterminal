@@ -8,7 +8,7 @@ import version from '../version.js'
 
 const Footer = () => {
     return (
-        <Box>
+        <Box sx={{ marginTop: 'auto' }}>
             { /* Made in Germany :D */}
             <Box sx={{ mx: 'auto', mt: 0 }}>
                 <Typography
@@ -24,7 +24,7 @@ const Footer = () => {
                 align='center'
                 display='block'
                 sx={{ color: '#ddd' }}>
-                {version.name}
+                <Link href='https://github.com/spacehuhntech/serial' target='_blank' underline='hover' color='inherit'>{version.name}</Link>
             </Typography>
         </Box>
     )
