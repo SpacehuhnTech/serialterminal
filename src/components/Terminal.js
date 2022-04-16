@@ -10,13 +10,15 @@ const Terminal = (props) => {
     // User input from input field
     const [input, setInput] = React.useState('')
 
-    // Currently receieved string & list of previous receieved lines
+    // Currently receieved string
     const received = React.useRef('')
+
+     // List of received lines
     const [history, setHistory] = React.useState([])
 
     React.useEffect(
         () => {
-            const str = `${received.current}${props.received}`
+            const str = `${received.current}${props.received.value}`
             const lines = str.split('\n')
 
             let newReceived = str
@@ -28,7 +30,8 @@ const Terminal = (props) => {
                 lines.forEach(line => {
                     newLines.push({
                         type: 'output',
-                        msg: `${line}`,
+                        value: `${line}`,
+                        time: props.received.time,
                     })
                 })
             }
@@ -45,7 +48,8 @@ const Terminal = (props) => {
             ...history,
             {
                 type: 'userInput',
-                msg: input,
+                value: input,
+                time: new Date(),
             },
         ])
         setInput('')
@@ -80,7 +84,7 @@ const Terminal = (props) => {
 }
 
 Terminal.propTypes = {
-    received: PropTypes.string,
+    received: PropTypes.object,
     send: PropTypes.func,
     openSettings: PropTypes.func,
     echo: PropTypes.bool,

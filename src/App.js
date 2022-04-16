@@ -45,7 +45,7 @@ function App() {
   const [connected, setConnected] = React.useState(false)
 
   // Receive Buffer
-  const [received, setReceived] = React.useState('')
+  const [received, setReceived] = React.useState({ time: new Date(), value: '' })
 
   // Connect/Disconnect Toast Open
   const [toast, setToast] = React.useState({ open: false, severity: 'info', value: '' })
@@ -88,7 +88,10 @@ function App() {
     }
 
     serial.onReceive = (value) => {
-      setReceived(`${value}`)
+      setReceived({
+        time: new Date(),
+        value: `${value}`,
+      })
       //console.log(value)
     }
 

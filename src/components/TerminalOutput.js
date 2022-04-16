@@ -130,10 +130,11 @@ const TerminalOutput = (props) => {
             { /* Text */}
             <Box sx={boxCSS}>
                 <code style={codeCSS}>
-                    {props.history.filter(line => (line.type === 'output' || props.echo)).map((obj, i) => (
-                        <span key={i} style={lineCSS[obj.type]}>
-                            {obj.msg}
-                            {obj.type === 'userInput' && <hr />}
+                    {props.history.filter(line => (line.type === 'output' || props.echo)).map((line, i) => (
+                        <span key={i} style={lineCSS[line.type]}>
+                            {line.time.toTimeString().substring(0, 8)}&nbsp;
+                            {line.value}
+                            {line.type === 'userInput' && <hr />}
                             <br />
                         </span>
                     ))}
@@ -150,14 +151,14 @@ const TerminalOutput = (props) => {
                 </DialogTitle>
                 <List sx={{ minWidth: '10em' }}>
                     {props.history.filter(line => line.type === 'userInput').map((line, i) => (
-                        <ListItem button key={`${line.msg}${i}`} onClick={() => {
-                            props.setInput(line.msg)
+                        <ListItem button key={i} onClick={() => {
+                            props.setInput(line.value)
                             setHistoryOpen(false)
                         }}>
                             <ListItemIcon>
                                 <TerminalIcon />
                             </ListItemIcon>
-                            <ListItemText primary={line.msg} />
+                            <ListItemText primary={line.value} />
                         </ListItem>
                     ))}
                 </List>
