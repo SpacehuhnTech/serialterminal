@@ -98,6 +98,11 @@ const lineCSS = {
     }
 }
 
+const timeCSS = {
+    fontWeight: 300,
+    color: '#aaa'
+}
+
 const TerminalOutput = (props) => {
     // User input history window
     const [historyOpen, setHistoryOpen] = React.useState(false)
@@ -134,7 +139,7 @@ const TerminalOutput = (props) => {
                 <code style={codeCSS}>
                     {props.history.filter(line => (line.type === 'output' || props.echo)).map((line, i) => (
                         <span key={i} style={lineCSS[line.type]}>
-                            {props.time && `${line.time.toTimeString().substring(0, 8)} `}
+                            <span style={timeCSS}>{props.time && `${line.time.toTimeString().substring(0, 8)} `}</span>
                             {line.value}
                             <br />
                         </span>
