@@ -29,6 +29,7 @@ const baudrates = [
     230400,
     250000,
     500000,
+    921600,
     1000000,
     2000000,
 ]
@@ -46,14 +47,14 @@ const formElementCSS = {
 }
 
 const Settings = (props) => {
-    const [baudRate, setBaudRate] = React.useState(props.baudRate)
-    const [lineEnding, setLineEnding] = React.useState(props.lineEnding)
-    const [echoFlag, setEchoFlag] = React.useState(props.echoFlag)
+    const [baudRate, setBaudRate] = React.useState(props.settings.baudRate)
+    const [lineEnding, setLineEnding] = React.useState(props.settings.lineEnding)
+    const [echoFlag, setEchoFlag] = React.useState(props.settings.echoFlag)
 
     const cancel = () => {
-        setBaudRate(props.baudRate)
-        setLineEnding(props.lineEnding)
-        setEchoFlag(props.echoFlag)
+        setBaudRate(props.settings.baudRate)
+        setLineEnding(props.settings.lineEnding)
+        setEchoFlag(props.settings.echoFlag)
         
         props.close()
     }
@@ -65,11 +66,12 @@ const Settings = (props) => {
     }
 
     const save = () => {
-        props.setBaudRate(baudRate)
-        props.setLineEnding(lineEnding)
-        props.setEchoFlag(echoFlag)
-
-        props.save()
+        props.save({
+            baudRate: baudRate,
+            lineEnding: lineEnding,
+            echoFlag: echoFlag,
+        })
+        
         props.close()
 
         props.saveToast()
@@ -134,12 +136,7 @@ const Settings = (props) => {
 Settings.propTypes = {
     open: PropTypes.bool,
     close: PropTypes.func,
-    baudRate: PropTypes.number,
-    setBaudRate: PropTypes.func,
-    lineEnding: PropTypes.string,
-    setLineEnding: PropTypes.func,
-    echoFlag: PropTypes.bool,
-    setEchoFlag: PropTypes.func,
+    settings: PropTypes.object,
     save: PropTypes.func,
     openPort: PropTypes.bool,
     saveToast: PropTypes.func,

@@ -14,10 +14,6 @@ import ErrorMessage from './components/ErrorMessage'
 import Serial from './modules/Serial'
 import { setCookie, getCookie } from './modules/cookie.js'
 
-const saveSettings = (settings) => {
-  setCookie('settings', JSON.stringify(settings), 365)
-}
-
 const loadSettings = () => {
   let settings = {
     baudRate: 115200,
@@ -37,7 +33,7 @@ const loadSettings = () => {
     console.error(e)
   }
 
-  saveSettings(settings)
+  //saveSettings(settings)
   return settings
 }
 
@@ -62,10 +58,13 @@ function App() {
   const [errorMessage, setErrorMessage] = React.useState('')
 
   // Settings
-  const settings = loadSettings()
-  const [baudRate, setBaudRate] = React.useState(settings.baudRate)
-  const [lineEnding, setLineEnding] = React.useState(settings.lineEnding)
-  const [echoFlag, setEchoFlag] = React.useState(settings.echoFlag)
+  const [settings, setSettings] = React.useState(loadSettings())
+
+  const saveSettings = (newSettings) => {
+    serial.setBaudRate(newSettings.baudRate)
+    setSettings(newSettings)
+    setCookie('settings', JSON.stringify(newSettings), 365)
+  }
 
   const closeToast = () => {
     setToast({ ...toast, open: false })
@@ -114,17 +113,7 @@ function App() {
       '\\r\\n': '\r\n',
     }
 
-    serial.send(`${str}${map[lineEnding]}`)
-  }
-
-  const handleSave = () => {
-    serial.setBaudRate(baudRate)
-
-    saveSettings({
-      baudRate: baudRate,
-      lineEnding: lineEnding,
-      echoFlag: echoFlag
-    })
+    serial.send(`${str}${map[settings.lineEnding]}`)
   }
 
   return (
@@ -142,7 +131,7 @@ function App() {
           received={received}
           send={handleSend}
           openSettings={() => setSettingsOpen(true)}
-          echo={echoFlag}
+          echo={settings.echoFlag}
           clearToast={() => setToast({ open: true, severity: 'info', value: 'History cleared 🧹' })}
         />
         :
@@ -157,13 +146,8 @@ function App() {
       <Settings
         open={settingsOpen}
         close={() => setSettingsOpen(false)}
-        baudRate={baudRate}
-        setBaudRate={setBaudRate}
-        lineEnding={lineEnding}
-        setLineEnding={setLineEnding}
-        echoFlag={echoFlag}
-        setEchoFlag={setEchoFlag}
-        save={handleSave}
+        settings={settings}
+        save={saveSettings}
         openPort={connected}
         saveToast={() => setToast({ open: true, severity: 'success', value: 'Settings saved ✨' })}
       />
