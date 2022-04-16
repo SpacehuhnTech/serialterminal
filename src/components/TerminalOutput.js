@@ -134,7 +134,7 @@ const TerminalOutput = (props) => {
                 <code style={codeCSS}>
                     {props.history.filter(line => (line.type === 'output' || props.echo)).map((line, i) => (
                         <span key={i} style={lineCSS[line.type]}>
-                            {line.time.toTimeString().substring(0, 8)}&nbsp;
+                            {props.time && `${line.time.toTimeString().substring(0, 8)} `}
                             {line.value}
                             <br />
                         </span>
@@ -175,6 +175,7 @@ TerminalOutput.propTypes = {
     setInput: PropTypes.func,
     openSettings: PropTypes.func,
     echo: PropTypes.bool,
+    time: PropTypes.bool,
     clearToast: PropTypes.func,
 }
 

@@ -50,11 +50,13 @@ const Settings = (props) => {
     const [baudRate, setBaudRate] = React.useState(props.settings.baudRate)
     const [lineEnding, setLineEnding] = React.useState(props.settings.lineEnding)
     const [echoFlag, setEchoFlag] = React.useState(props.settings.echoFlag)
+    const [timeFlag, setTimeFlag] = React.useState(props.settings.timeFlag)
 
     const cancel = () => {
         setBaudRate(props.settings.baudRate)
         setLineEnding(props.settings.lineEnding)
         setEchoFlag(props.settings.echoFlag)
+        setTimeFlag(props.settings.timeFlag)
         
         props.close()
     }
@@ -70,6 +72,7 @@ const Settings = (props) => {
             baudRate: baudRate,
             lineEnding: lineEnding,
             echoFlag: echoFlag,
+            timeFlag: timeFlag,
         })
         
         props.close()
@@ -120,6 +123,15 @@ const Settings = (props) => {
                             onChange={(e) => setEchoFlag(e.target.checked)}
                         />
                     } label='Show input (echo)' />
+                </FormGroup>
+                
+                <FormGroup>
+                    <FormControlLabel control={
+                        <Checkbox
+                            checked={timeFlag}
+                            onChange={(e) => setTimeFlag(e.target.checked)}
+                        />
+                    } label='Timestamps' />
                 </FormGroup>
 
             </DialogContent>

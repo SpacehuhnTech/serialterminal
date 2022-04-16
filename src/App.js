@@ -19,6 +19,7 @@ const loadSettings = () => {
     baudRate: 115200,
     lineEnding: '\\r\\n',
     echoFlag: true,
+    timeFlag: false,
   }
 
   const cookieValue = getCookie('settings')
@@ -29,6 +30,7 @@ const loadSettings = () => {
     if ('baudRate' in cookieJSON) settings.baudRate = cookieJSON.baudRate
     if ('lineEnding' in cookieJSON) settings.lineEnding = cookieJSON.lineEnding
     if ('echoFlag' in cookieJSON) settings.echoFlag = cookieJSON.echoFlag
+    if ('timeFlag' in cookieJSON) settings.timeFlag = cookieJSON.timeFlag
   } catch (e) {
     console.error(e)
   }
@@ -135,6 +137,7 @@ function App() {
           send={handleSend}
           openSettings={() => setSettingsOpen(true)}
           echo={settings.echoFlag}
+          time={settings.timeFlag}
           clearToast={() => setToast({ open: true, severity: 'info', value: 'History cleared 🧹' })}
         />
         :

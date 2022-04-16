@@ -67,6 +67,7 @@ const Terminal = (props) => {
                     setInput={setInput}
                     openSettings={props.openSettings}
                     echo={props.echo}
+                    time={props.time}
                     clearToast={props.clearToast}
                 />
             </Grid>
@@ -88,6 +89,7 @@ Terminal.propTypes = {
     send: PropTypes.func,
     openSettings: PropTypes.func,
     echo: PropTypes.bool,
+    time: PropTypes.bool,
     clearToast: PropTypes.func,
 }
 
