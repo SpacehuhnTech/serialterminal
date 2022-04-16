@@ -93,6 +93,8 @@ const lineCSS = {
     'userInput': {
         color: '#fbbc05',
         fontWeight: 700,
+        display: 'block',
+        borderBottom: '1px solid',
     }
 }
 
@@ -134,7 +136,6 @@ const TerminalOutput = (props) => {
                         <span key={i} style={lineCSS[line.type]}>
                             {line.time.toTimeString().substring(0, 8)}&nbsp;
                             {line.value}
-                            {line.type === 'userInput' && <hr />}
                             <br />
                         </span>
                     ))}
