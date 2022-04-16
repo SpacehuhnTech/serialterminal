@@ -100,7 +100,8 @@ const lineCSS = {
 
 const timeCSS = {
     fontWeight: 300,
-    color: '#aaa'
+    color: '#aaa',
+    width: '100%'
 }
 
 const TerminalOutput = (props) => {
