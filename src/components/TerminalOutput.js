@@ -15,6 +15,8 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import TerminalIcon from '@mui/icons-material/Terminal'
 
+import './TerminalOutput.css'
+
 const TerminalOutput = (props) => {
     // User input history window
     const [historyOpen, setHistoryOpen] = React.useState(false)
