@@ -4,8 +4,8 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import AddBoxIcon from '@mui/icons-material/AddBox'
+import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 
 const Header = () => {
     return (
@@ -38,10 +38,10 @@ const Header = () => {
                     //variant='contained'
                     //color='success'
                     sx={{ color: '#fff' }}
-                    href='https://ko-fi.com/spacehuhn'
+                    href='https://huhn.me/'
                     target='_blank'
-                    startIcon={<FavoriteIcon />}>
-                    Say Thanks
+                    endIcon={<OpenInNewIcon />}>
+                    More Tools
                 </Button>
 
                 <Button
