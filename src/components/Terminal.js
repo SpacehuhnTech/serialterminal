@@ -13,7 +13,7 @@ const Terminal = (props) => {
     // Currently receieved string
     const received = React.useRef('')
 
-     // List of received lines
+    // List of received lines
     const [history, setHistory] = React.useState([])
 
     React.useEffect(
@@ -55,10 +55,22 @@ const Terminal = (props) => {
         setInput('')
     }
 
+    const handleKeyDown = (e) => {
+        if (props.ctrl) {
+            let charCode = String.fromCharCode(e.which).toUpperCase()
+
+            if ((e.ctrlKey || e.metaKey) && charCode === 'C') {
+                e.preventDefault()
+                props.sendRaw(3)
+            } else if ((e.ctrlKey || e.metaKey) && charCode === 'D') {
+                e.preventDefault()
+                props.sendRaw(4)
+            }
+        }
+    }
+
     return (
-        <Grid container spacing={1} sx={{
-            padding: '.75em',
-        }}>
+        <Grid container spacing={1} sx={{ p: .75, }} onKeyDown={handleKeyDown}>
             { /* Terminal Window */}
             <Grid item xs={12}>
                 <TerminalOutput
@@ -87,9 +99,11 @@ const Terminal = (props) => {
 Terminal.propTypes = {
     received: PropTypes.object,
     send: PropTypes.func,
+    sendRaw: PropTypes.func,
     openSettings: PropTypes.func,
     echo: PropTypes.bool,
     time: PropTypes.bool,
+    ctrl: PropTypes.bool,
     clearToast: PropTypes.func,
 }
 

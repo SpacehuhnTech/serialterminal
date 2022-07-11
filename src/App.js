@@ -20,6 +20,7 @@ const loadSettings = () => {
     lineEnding: '\\r\\n',
     echoFlag: true,
     timeFlag: false,
+    ctrlFlag: true,
   }
 
   const cookieValue = getCookie('settings')
@@ -31,6 +32,7 @@ const loadSettings = () => {
     if ('lineEnding' in cookieJSON) settings.lineEnding = cookieJSON.lineEnding
     if ('echoFlag' in cookieJSON) settings.echoFlag = cookieJSON.echoFlag
     if ('timeFlag' in cookieJSON) settings.timeFlag = cookieJSON.timeFlag
+    if ('ctrlFlag' in cookieJSON) settings.ctrlFlag = cookieJSON.ctrlFlag
   } catch (e) {
     console.error(e)
   }
@@ -121,6 +123,10 @@ function App() {
     serial.send(`${str}${map[settings.lineEnding]}`)
   }
 
+  const handleRawSend = (byte) => {
+    serial.sendByte(byte)
+  }
+
   return (
     <Box sx={{
       display: 'flex',
@@ -135,9 +141,11 @@ function App() {
         <Terminal
           received={received}
           send={handleSend}
+          sendRaw={handleRawSend}
           openSettings={() => setSettingsOpen(true)}
           echo={settings.echoFlag}
           time={settings.timeFlag}
+          ctrl={settings.ctrlFlag}
           clearToast={() => setToast({ open: true, severity: 'info', value: 'History cleared 🧹' })}
         />
         :

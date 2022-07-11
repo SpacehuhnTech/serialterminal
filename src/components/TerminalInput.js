@@ -36,6 +36,7 @@ const TerminalInput = (props) => {
                     fullWidth
                     onKeyDown={(e) => e.key === 'Enter' && props.send()}
                     //disabled={disableSend}
+                    autoComplete='off'
                     autoFocus
                     inputRef={inputFocus}
                 />

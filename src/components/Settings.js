@@ -51,12 +51,14 @@ const Settings = (props) => {
     const [lineEnding, setLineEnding] = React.useState(props.settings.lineEnding)
     const [echoFlag, setEchoFlag] = React.useState(props.settings.echoFlag)
     const [timeFlag, setTimeFlag] = React.useState(props.settings.timeFlag)
+    const [ctrlFlag, setCtrlFlag] = React.useState(props.settings.ctrlFlag)
 
     const cancel = () => {
         setBaudRate(props.settings.baudRate)
         setLineEnding(props.settings.lineEnding)
         setEchoFlag(props.settings.echoFlag)
         setTimeFlag(props.settings.timeFlag)
+        setCtrlFlag(props.settings.ctrlFlag)
         
         props.close()
     }
@@ -65,6 +67,8 @@ const Settings = (props) => {
         if(!props.openPort) setBaudRate(115200)
         setLineEnding('\\r\\n')
         setEchoFlag(true)
+        setTimeFlag(false)
+        setCtrlFlag(true)
     }
 
     const save = () => {
@@ -73,6 +77,7 @@ const Settings = (props) => {
             lineEnding: lineEnding,
             echoFlag: echoFlag,
             timeFlag: timeFlag,
+            ctrlFlag: ctrlFlag,
         })
         
         props.close()
@@ -131,7 +136,16 @@ const Settings = (props) => {
                             checked={timeFlag}
                             onChange={(e) => setTimeFlag(e.target.checked)}
                         />
-                    } label='Timestamps' />
+                    } label='Show timestamps' />
+                </FormGroup>
+                
+                <FormGroup>
+                    <FormControlLabel control={
+                        <Checkbox
+                            checked={ctrlFlag}
+                            onChange={(e) => setCtrlFlag(e.target.checked)}
+                        />
+                    } label='Detect CTRL+C, CTRL+D' />
                 </FormGroup>
 
             </DialogContent>

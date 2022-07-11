@@ -125,6 +125,15 @@ export default class Serial {
         writer.releaseLock()*/
     }
 
+    async sendByte(value) {
+        const writer =  this.outputStream.getWriter()
+
+        const data = new Uint8Array([value])
+        await writer.write(data)
+
+        writer.releaseLock()
+    }
+
     async close() {
         if (this.open) {
             this.open = false
