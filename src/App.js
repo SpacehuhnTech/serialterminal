@@ -23,7 +23,7 @@ const loadSettings = () => {
     ctrlFlag: true,
   }
 
-  const cookieValue = getCookie('settings')
+  const cookieValue = getCookie('settings' || "{}")
 
   try {
     const cookieJSON = JSON.parse(cookieValue)
