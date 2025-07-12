@@ -1,7 +1,7 @@
 # Web Serial Terminal
 A nice looking serial terminal in the web. Open-Source, free, and easy to use.
 
-Have a look [serial.huhn.me](https://serial.huhn.me)
+Have a look [terminal.spacehuhn.com](https://terminal.spacehuhn.com)
 
 ## Installation
 
